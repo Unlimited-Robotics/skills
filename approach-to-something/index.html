@@ -68,6 +68,17 @@
       border-color: darkcyan;
       color: darkcyan;
     }
+
+    .versions {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .versions a {
+      display: block;
+      text-decoration: none;
+      padding: 0px 10px;
+    }
   </style>
   <title>
     Pypi - YourCompany
@@ -88,9 +99,6 @@
       hidden><button class="danger-button" disabled>DANGER ! A higher version of <i>approach_to_something</i> already exists on PyPi</button></pre>
     <pre
       id='installcmd'><code>pip install approach_to_something --extra-index-url https://unlimited-robotics.github.io/skills/</code></pre>
-    <a
-      href="git+https://github.com/unlimitedrobotics-skills/approach_to_something@0.6.0#egg=approach-to-something-0.6.0">
-    </a>
     <hr />
     <div class="row">
       <div class="three columns">
@@ -103,6 +111,11 @@
           </b>
           Ur
         </p>
+        <section class="versions">
+          <a href="git+https://github.com/unlimitedrobotics-skills/approach_to_something@0.6.0#egg=approach-to-something-0.6.0">
+            0.6.0
+          </a>
+        </section>
       </div>
       <div class="nine columns">
         <h6 class="text-header">
