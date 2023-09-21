@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+ <head>
   <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
   <!-- Skeleton CSS -->
-  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
-    rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet"/>
   <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"
-    type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet" type="text/css"/>
   <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js">
+  </script>
   <!-- Our JS -->
-  <script type="text/javascript" src="../pypi_checker.js"></script>
+  <script src="../pypi_checker.js" type="text/javascript">
+  </script>
   <!-- Favicon -->
-  <link
-    href="https://gist.githubusercontent.com/astariul/c09af596e802e945d3032774e10e1047/raw/f693a2e2b65966494da082887bc4be2917f615e4/random_icon.svg"
-    rel="icon" />
+  <link href="https://gist.githubusercontent.com/astariul/c09af596e802e945d3032774e10e1047/raw/f693a2e2b65966494da082887bc4be2917f615e4/random_icon.svg" rel="icon"/>
   <style>
-    body {
+   body {
       font-family: "Montserrat";
     }
 
@@ -81,54 +78,54 @@
     }
   </style>
   <title>
-    Pypi - YourCompany
+   Pypi - YourCompany
   </title>
-</head>
-
-<body>
+ </head>
+ <body>
   <div class="container">
-    <section class="header">
-      approach_to_tags
-      <span>
-      </span>
-      <span id='latest-version' class="version">
-        1.0.1
-      </span>
-    </section>
-    <pre id='installdanger'
-      hidden><button class="danger-button" disabled>DANGER ! A higher version of <i>approach_to_tags</i> already exists on PyPi</button></pre>
-    <pre
-      id='installcmd'><code>pip install approach_to_tags --extra-index-url https://unlimited-robotics.github.io/skills/</code></pre>
-    <hr />
-    <div class="row">
-      <div class="three columns">
-        <button onclick="location.href='https://github.com/unlimitedrobotics-skills/approach_to_tags'">
-          Homepage
-        </button>
-        <p class="elem">
-          <b>
-            Author :
-          </b>
-          Ur
-        </p>
-        <section class="versions">
-          <a href="git+https://github.com/unlimitedrobotics-skills/approach_to_tags@1.0.1#egg=approach-to-tags-1.0.1">
-            1.0.1
-          </a>
-        </section>
-      </div>
-      <div class="nine columns">
-        <h6 class="text-header">
-          Description
-        </h6>
-        <p>
-          skill
-        </p>
-      </div>
+   <section class="header">
+    approach_to_tags
+    <span>
+    </span>
+    <span class="version" id="latest-version">
+     2.0.0
+    </span>
+   </section>
+   <pre hidden="" id="installdanger"><button class="danger-button" disabled="">DANGER ! A higher version of <i>approach_to_tags</i> already exists on PyPi</button></pre>
+   <pre id="installcmd"><code>pip install approach_to_tags --extra-index-url https://unlimited-robotics.github.io/skills/</code></pre>
+   <hr/>
+   <div class="row">
+    <div class="three columns">
+     <button onclick="location.href='https://github.com/unlimitedrobotics-skills/approach_to_tags'">
+      Homepage
+     </button>
+     <p class="elem">
+      <b>
+       Author :
+      </b>
+      Ur
+     </p>
+     <section class="versions">
+      <a href="git+https://github.com/unlimitedrobotics-skills/approach_to_tags@1.0.1#egg=approach-to-tags-1.0.1">
+       1.0.1
+      </a>
+      <a href="git+https://github.com/unlimitedrobotics-skills/approach_to_tags@2.0.0#egg=approach-to-tags-2.0.0">
+       1.0.1
+      </a>
+     </section>
     </div>
+    <div class="nine columns">
+     <h6 class="text-header">
+      Description
+     </h6>
+     <p>
+      skill
+     </p>
+    </div>
+   </div>
   </div>
   <script>
-    function warn_unsafe() {
+   function warn_unsafe() {
       document.getElementById('installdanger').hidden = false;
       document.getElementById('installcmd').hidden = true;
     }
@@ -138,6 +135,5 @@
       check_supply_chain_attack("approach_to_tags", this_vers, warn_unsafe);
     });
   </script>
-</body>
-
+ </body>
 </html>
