@@ -24,8 +24,21 @@ def package_exists(soup, package_name):
             return True
     return False
 
+def transform_github_url(input_url):
+    # Split the input URL to extract relevant information
+    parts = input_url.split('@')
+    
+    # Extract the repository URL and version
+    repo_url, version = parts[1].split('#')
 
-def register(pkg_name, version, author, short_desc, long_desc, homepage, link):
+    # Create the raw GitHub content URL
+    raw_url = f'https://raw.githubusercontent.com/{repo_url}/main/README.md'
+    return raw_url
+
+
+def register(pkg_name, version, author, short_desc, homepage):
+    link = f'git+{homepage}@{version}'
+    long_desc = transform_github_url(homepage)
     # Read our index first
     with open(INDEX_FILE) as html_file:
         soup = BeautifulSoup(html_file, "html.parser")
@@ -131,9 +144,7 @@ def main():
             version=os.environ["PKG_VERSION"],
             author=os.environ["PKG_AUTHOR"],
             short_desc=os.environ["PKG_SHORT_DESC"],
-            long_desc=os.environ["PKG_LONG_DESC"],
             homepage=os.environ["PKG_HOMEPAGE"],
-            link=os.environ["PKG_LINK"],
         )
     elif action == "DELETE":
         delete(pkg_name=os.environ["PKG_NAME"])
