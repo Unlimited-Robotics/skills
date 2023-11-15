@@ -43,20 +43,28 @@
       display: inline-block;
       height: auto;
       min-width: 32%;
-      padding: 0.5rem 2rem;
+      padding: 1rem 2rem;
       margin: 0.5rem 0.5rem;
-      color: #555;
+      color: #0094c6;
       font-size: 1.5rem;
       font-weight: 600;
       line-height: 1.5;
       letter-spacing: .05rem;
       text-decoration: none;
       white-space: normal;
-      background-color: transparent;
+      background-color: #F1F1F1;
       border-radius: 4px;
-      border: 1px solid #bbb;
       cursor: pointer;
       box-sizing: border-box;
+    }
+
+    .card span:nth-child(2) {
+      font-weight: lighter;
+    }
+
+    .card span:nth-child(4) {
+      color: black;
+      font-weight: lighter;
     }
 
     .card:hover {
@@ -90,19 +98,21 @@
  <body>
   <div class="container">
    <section class="header">
-    <img class="value-img" src="https://gist.githubusercontent.com/astariul/c09af596e802e945d3032774e10e1047/raw/f693a2e2b65966494da082887bc4be2917f615e4/random_icon.svg" width="150"/>
+    <img class="value-img" src="https://staging.d2qh8a3l0fd56p.amplifyapp.com/static/media/LogoHorizontal.6716a9a241f10fd15e5b905e564cd3f4.svg" width="350"/>
     <br/>
     <br/>
     <h2 class="title">
-     YourCompany own PyPi
+      Skills Index
     </h2>
    </section>
    <br/>
    <p>
-    Welcome to the private Python package index of YourCompany !
+    Welcome to the private skills package index of Unlimited Robotics !
     <br/>
-    You can install packages with :
-    <pre><code>pip install &lt;package_name&gt; --extra-index-url https://unlimited-robotics.github.io/skills/</code></pre>
+    You can install skills with :
+    <pre><code>rayasdk skills install &lt;package_name&gt; </code></pre>
+    In case that you want a specific version, you can use :
+    <pre><code>rayasdk skills install &lt;package_name&gt; '==&lt;version&gt;' </code></pre>
    </p>
    <hr/>
    <h6 class="text-header">
