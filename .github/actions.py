@@ -26,13 +26,11 @@ def package_exists(soup, package_name):
 
 def transform_github_url(input_url):
     # Split the input URL to extract relevant information
-    parts = input_url.split('@')
-    
-    # Extract the repository URL and version
-    repo_url, version = parts[1].split('#')
+    parts = input_url.rstrip('/').split('/')
+    username, repo = parts[-2], parts[-1]
 
     # Create the raw GitHub content URL
-    raw_url = f'https://raw.githubusercontent.com/{repo_url}/main/README.md'
+    raw_url = f'https://raw.githubusercontent.com/{username}/{repo}/main/README.md'
     return raw_url
 
 
