@@ -123,11 +123,7 @@
         <h6 class="text-header">
           Description
         </h6>
-        <p>
-          <iframe src="_long_description" width="100%" height="600px">
-            <!-- Provide a fallback message if the iframe cannot be loaded -->
-            <p>Your browser does not support iframes.</p>
-        </iframe>
+        <p id="markdown-container">
         </p>
       </div>
     </div>
@@ -137,6 +133,21 @@
       document.getElementById('installdanger').hidden = false;
       document.getElementById('installcmd').hidden = true;
     }
+
+    var url_readme = '_long_description';
+    fetch(url_readme)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Failed to fetch content. Status code: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(markupContent => {
+      document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
+    })
+    .catch(error => {
+        console.error('Error:', error.message);
+    });
 
     $(document).ready(function () {
       var this_vers = document.getElementById('latest-version').textContent.trim();
