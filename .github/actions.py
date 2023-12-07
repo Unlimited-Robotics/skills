@@ -24,6 +24,7 @@ def package_exists(soup, package_name):
             return True
     return False
 
+
 def transform_github_url(input_url):
     # Split the input URL to extract relevant information
     parts = input_url.rstrip('/').split('/')
@@ -32,6 +33,20 @@ def transform_github_url(input_url):
     # Create the raw GitHub content URL
     raw_url = f'https://raw.githubusercontent.com/{username}/{repo}/main/README.md'
     return raw_url
+
+
+def find_homepage_url(soup):
+    # Find the button with the onclick attribute containing the URL
+    button = soup.find("button", onclick=lambda x: "location.href" in x)
+    if button:
+        # Extract the URL from the onclick attribute
+        onclick_attr = button.get("onclick")
+        url_start = onclick_attr.find("'") + 1
+        url_end = onclick_attr.rfind("'")
+        homepage_url = onclick_attr[url_start:url_end]
+        return homepage_url
+    else:
+        return None  # If the button is not found
 
 
 def register(pkg_name, version, author, short_desc, homepage):
@@ -76,7 +91,7 @@ def register(pkg_name, version, author, short_desc, homepage):
         f.write(template)
 
 
-def update(pkg_name, version, link):
+def update(pkg_name, version):
     # Read our index first
     with open(INDEX_FILE) as html_file:
         soup = BeautifulSoup(html_file, "html.parser")
@@ -96,14 +111,27 @@ def update(pkg_name, version, link):
     index_file = os.path.join(norm_pkg_name, INDEX_FILE) 
     with open(index_file) as html_file:
         soup = BeautifulSoup(html_file, "html.parser")
+        
+    # Extract the URL from the onclick attribute
+    button = soup.find_all("button")[1]
+    if button:
+        onclick_attr = button.get("onclick")
+        url_start = onclick_attr.find("'") + 1
+        url_end = onclick_attr.rfind("'")
+        link = onclick_attr[url_start:url_end]
+    else:
+        raise Exception("Homepage URL not found")
 
     # Create a new anchor element for our new version
-    last_anchor = soup.find_all('a')[-1]        # Copy the last anchor element
-    new_anchor = copy.copy(last_anchor)
-    new_anchor['href'] = "{}#egg={}-{}".format(link, norm_pkg_name, version)
+    original_div = soup.find('section', class_='versions').find('div')
+    new_div = copy.copy(original_div)
+    anchors = new_div.find_all('a')
+    anchors[0]['onclick'] = "load_readme('{}')".format(version)
+    anchors[0].string = version
+    anchors[1]['href'] = "git+{}@{}#egg={}-{}".format(link,version,norm_pkg_name,version)
 
     # Add it to our index
-    last_anchor.insert_after(new_anchor)
+    original_div.insert_after(new_div)
 
     # Change the latest version
     soup.html.body.div.section.find_all('span')[1].contents[0].replace_with(version) 
@@ -149,8 +177,7 @@ def main():
     elif action == "UPDATE":
         update(
             pkg_name=os.environ["PKG_NAME"],
-            version=os.environ["PKG_VERSION"],
-            link=os.environ["PKG_LINK"],
+            version=os.environ["PKG_VERSION"]
         )
 
 

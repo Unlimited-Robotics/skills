@@ -44,9 +44,7 @@ jobs:
         PKG_VERSION: ${{ inputs.version }}
         PKG_AUTHOR: ${{ inputs.author }}
         PKG_SHORT_DESC: ${{ inputs.short_desc }}
-        PKG_LONG_DESC: ${{ inputs.long_desc }}
         PKG_HOMEPAGE: ${{ inputs.homepage }}
-        PKG_LINK: ${{ inputs.link }}
       run: |
         pip install beautifulsoup4
         python .github/actions.py 
