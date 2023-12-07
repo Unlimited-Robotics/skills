@@ -76,10 +76,18 @@
       flex-direction: column-reverse;
     }
 
-    .versions a {
+    .versions div {
       display: block;
       text-decoration: none;
       padding: 0px 10px;
+    }
+
+    .versions div a:nth-of-type(1) {
+      cursor: pointer;
+    }
+
+    .versions div a:nth-of-type(2) {
+      display: none;
     }
   </style>
   <title>
@@ -114,9 +122,14 @@
           _author
         </p>
         <section class="versions">
-          <a href="_link">
-            _version
-          </a>
+          <div>
+            <a onclick="load_readme('_version')">
+              _version
+            </a>
+            <a href="_link">
+              _version
+            </a>
+          </div>
         </section>
       </div>
       <div class="nine columns">
@@ -156,7 +169,7 @@
     $(document).ready(function () {
       var this_vers = document.getElementById('latest-version').textContent.trim();
       check_supply_chain_attack("_package_name", this_vers, warn_unsafe);
-      load_readme(_version);
+      load_readme("_version");
     });
   </script>
 </body>
