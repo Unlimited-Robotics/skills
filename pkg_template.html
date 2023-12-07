@@ -132,8 +132,8 @@
     var url_readme_main = '_long_description';
 
     function load_readme(version){
-      let url_version = url_readme_main.replace('main', version);
-      fetch(url_version)
+      let urlVersion = url_readme_main.replace('main', version);
+      fetch(urlVersion)
       .then(response => {
           if (!response.ok) {
               throw new Error(`Failed to fetch content. Status code: ${response.status}`);
@@ -156,7 +156,7 @@
     $(document).ready(function () {
       var this_vers = document.getElementById('latest-version').textContent.trim();
       check_supply_chain_attack("_package_name", this_vers, warn_unsafe);
-      load_readme(url_readme_main);
+      load_readme(_version);
     });
   </script>
 </body>
