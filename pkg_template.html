@@ -66,9 +66,15 @@
       margin-bottom: .2rem;
     }
 
+    button {
+      border-color: #1EAEDB;
+      color: #1EAEDB;
+    }
+
     button:hover {
-      border-color: darkcyan;
-      color: darkcyan;
+      border-color: white;
+      color: white;
+      background-color: #1EAEDB;
     }
 
     .versions {
@@ -79,15 +85,46 @@
     .versions div {
       display: block;
       text-decoration: none;
-      padding: 0px 10px;
-    }
-
-    .versions div a:nth-of-type(1) {
+      padding: 10px 20px;
       cursor: pointer;
     }
 
     .versions div a:nth-of-type(2) {
       display: none;
+    }
+
+    .readme-block {
+      font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    }
+
+    .selected {
+      background-color: #1EAEDB;
+      border-radius: 5rem;
+    }
+
+    .selected a {
+      color: white;
+      font-weight: bold;
+    }
+
+    .selected.prerelease {
+      background: #ffdf76; /* Background for selected and prerelease elements */
+      position: relative; /* Position relative for absolute positioning of pseudo-element */
+    }
+
+    .selected.prerelease a{
+      color: #664e04;
+    }
+    
+    .selected.prerelease::after {
+      content: "Prerelease"; /* Text to display */
+      position: absolute;
+      right: 15px; /* Adjust as needed */
+      color: white;
+      font-size: 12px;
+      padding: 2px 5px;
+      background-color: #555555;
+      border-radius: 3px;
     }
   </style>
   <title>
@@ -121,9 +158,9 @@
           </b>
           _author
         </p>
-        <section class="versions">
-          <div>
-            <a onclick="load_readme('_version')">
+        <section class="versions" id="versions">
+          <div onclick="load_readme('_version')" id="_version">
+            <a>
               _version
             </a>
             <a href="_link">
@@ -136,7 +173,7 @@
         <h6 class="text-header">
           Description
         </h6>
-        <p id="markdown-container">
+        <p id="markdown-container" class="readme-block">
         </p>
       </div>
     </div>
@@ -154,6 +191,10 @@
           return response.text();
       })
       .then(markupContent => {
+        const contentDivs = document.querySelectorAll('.versions div');
+        contentDivs.forEach(div => div.classList.remove('selected'));
+
+        document.getElementById(version).classList.add('selected');
         document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
       })
       .catch(error => {

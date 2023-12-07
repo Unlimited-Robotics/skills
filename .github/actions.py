@@ -123,10 +123,14 @@ def update(pkg_name, version):
         raise Exception("Homepage URL not found")
 
     # Create a new anchor element for our new version
-    original_div = soup.find('section', class_='versions').find('div')
+    original_div = soup.find('section', class_='versions').findAll('div')[-1]
     new_div = copy.copy(original_div)
     anchors = new_div.find_all('a')
-    anchors[0]['onclick'] = "load_readme('{}')".format(version)
+    new_div['onclick'] = "load_readme('{}')".format(version)
+    new_div['id'] = version
+    new_div['class'] = ""
+    if 'dev' in version:
+        new_div['class'] += "prerelease"
     anchors[0].string = version
     anchors[1]['href'] = "git+{}@{}#egg={}-{}".format(link,version,norm_pkg_name,version)
 
