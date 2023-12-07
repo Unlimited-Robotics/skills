@@ -116,7 +116,7 @@
           Santiago Barragan
         </p>
         <section class="versions">
-          <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.0#egg=test-skill-0.1.0">
+          <a id-="version_0.1.0" href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.0#egg=test-skill-0.1.0">
             0.1.0
           </a>
         </section>
@@ -131,29 +131,39 @@
     </div>
   </div>
   <script>
+    var url_readme_main = 'https://raw.githubusercontent.com/Unlimited-Robotics/skill_test_skill/main/README.md';
+
+    function load_readme(version){
+      let url_version = url_readme_main.replace('main', version);
+      fetch(version)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`Failed to fetch content. Status code: ${response.status}`);
+          }
+          return response.text();
+      })
+      .then(markupContent => {
+        document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
+      })
+      .catch(error => {
+          console.error('Error:', error.message);
+      });
+    }
+
     function warn_unsafe() {
       document.getElementById('installdanger').hidden = false;
       document.getElementById('installcmd').hidden = true;
     }
 
-    var url_readme = 'https://raw.githubusercontent.com/Unlimited-Robotics/skill_test_skill/main/README.md';
-    fetch(url_readme)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Failed to fetch content. Status code: ${response.status}`);
-        }
-        return response.text();
-    })
-    .then(markupContent => {
-      document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
-    })
-    .catch(error => {
-        console.error('Error:', error.message);
+    document.getElementById("version_0.1.0").addEventListener("click", function(event) {
+      event.preventDefault();
+      console.log("clicked");
     });
 
     $(document).ready(function () {
       var this_vers = document.getElementById('latest-version').textContent.trim();
       check_supply_chain_attack("test_skill", this_vers, warn_unsafe);
+      load_readme(url_readme_main);
     });
   </script>
 </body>

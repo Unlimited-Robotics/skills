@@ -129,29 +129,34 @@
     </div>
   </div>
   <script>
+    var url_readme_main = '_long_description';
+
+    function load_readme(version){
+      let url_version = url_readme_main.replace('main', version);
+      fetch(url_version)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`Failed to fetch content. Status code: ${response.status}`);
+          }
+          return response.text();
+      })
+      .then(markupContent => {
+        document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
+      })
+      .catch(error => {
+          console.error('Error:', error.message);
+      });
+    }
+
     function warn_unsafe() {
       document.getElementById('installdanger').hidden = false;
       document.getElementById('installcmd').hidden = true;
     }
 
-    var url_readme = '_long_description';
-    fetch(url_readme)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Failed to fetch content. Status code: ${response.status}`);
-        }
-        return response.text();
-    })
-    .then(markupContent => {
-      document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
-    })
-    .catch(error => {
-        console.error('Error:', error.message);
-    });
-
     $(document).ready(function () {
       var this_vers = document.getElementById('latest-version').textContent.trim();
       check_supply_chain_attack("_package_name", this_vers, warn_unsafe);
+      load_readme(url_readme_main);
     });
   </script>
 </body>
