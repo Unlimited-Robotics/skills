@@ -1,0 +1,62 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Register",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.github/actions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PKG_ACTION": "REGISTER",
+                "PKG_NAME" : "test_skill",
+                "PKG_VERSION" : "0.1.0",
+                "PKG_AUTHOR" :  "test_author",
+                "PKG_SHORT_DESC" : "test_short_desc",
+                "PKG_HOMEPAGE" : "https://github.com/Unlimited-Robotics/skill_test_skill"
+            }
+        },
+        {
+            "name": "Update 0.1.1.dev",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.github/actions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PKG_ACTION" : "UPDATE",
+                "PKG_NAME" : "test_skill",
+                "PKG_VERSION" : "0.1.1.dev",
+            }
+        },
+        {
+            "name": "Update 0.2.1.dev",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.github/actions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PKG_ACTION" : "UPDATE",
+                "PKG_NAME" : "test_skill",
+                "PKG_VERSION" : "0.2.1.dev",
+            }
+        },
+        {
+            "name": "Delete",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.github/actions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PKG_ACTION" : "DELETE",
+                "PKG_NAME" : "test_skill",
+            }
+        }
+    ]
+}
