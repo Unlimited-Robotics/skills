@@ -61,16 +61,18 @@ def register(pkg_name, version, author, short_desc, homepage):
         raise ValueError("Package {} seems to already exists".format(norm_pkg_name))
 
     # Create a new anchor element for our new package
-    last_anchor = soup.find_all('a')[-1]        # Copy the last anchor element
-    new_anchor = copy.copy(last_anchor)
-    new_anchor['href'] = "{}/".format(norm_pkg_name)
-    new_anchor.contents[0].replace_with(pkg_name)
-    spans = new_anchor.find_all('span')
+    placeholder_card = soup.find('a', id='placeholder_card')
+    new_skill = copy.copy(placeholder_card)
+    new_skill['href'] = "{}/".format(norm_pkg_name)
+    new_skill.attrs.pop('style', None)
+    new_skill.attrs.pop('id', None)
+    new_skill.contents[0].replace_with(pkg_name)
+    spans = new_skill.find_all('span')
     spans[1].string = version       # First span contain the version
     spans[2].string = short_desc    # Second span contain the short description
 
     # Add it to our index and save it
-    last_anchor.insert_after(new_anchor)
+    placeholder_card.insert_after(new_skill)
     with open(INDEX_FILE, 'wb') as index:
         index.write(soup.prettify("utf-8"))
 
@@ -84,6 +86,7 @@ def register(pkg_name, version, author, short_desc, homepage):
     template = template.replace("_homepage", homepage)
     template = template.replace("_author", author)
     template = template.replace("_long_description", long_desc)
+    template = template.replace("_latest_main", version)
 
     os.mkdir(norm_pkg_name)
     package_index = os.path.join(norm_pkg_name, INDEX_FILE)
@@ -123,10 +126,18 @@ def update(pkg_name, version):
         raise Exception("Homepage URL not found")
 
     # Create a new anchor element for our new version
-    original_div = soup.find('section', class_='versions').find('div')
+    original_div = soup.find('section', class_='versions').findAll('div')[-1]
     new_div = copy.copy(original_div)
     anchors = new_div.find_all('a')
-    anchors[0]['onclick'] = "load_readme('{}')".format(version)
+    new_div['onclick'] = "load_readme('{}')".format(version)
+    new_div['id'] = version
+    new_div['class'] = ""
+    if 'dev' in version:
+        new_div['class'] += "prerelease"
+    else:
+        # replace the latest main version
+        main_version_span = soup.find('span', id='latest-main-version')
+        main_version_span.string = version
     anchors[0].string = version
     anchors[1]['href'] = "git+{}@{}#egg={}-{}".format(link,version,norm_pkg_name,version)
 

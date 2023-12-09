@@ -90,6 +90,29 @@
       border-color: tomato;
       color: tomato;
     }
+
+    /* Footer */
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .footer {
+      background-color: #f5f5f5;
+      color: #08183f;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
   <title>
    Unlimited Robotics - Skills Index
@@ -118,6 +141,30 @@
    <h6 class="text-header">
     Packages
    </h6>
+   <a class="card" href="" id="placeholder_card" style="display: none;">
+    placeholder_name
+    <span>
+    </span>
+    <span class="version">
+     placehholder_version
+    </span>
+    <br/>
+    <span class="description">
+     placeholder_description
+    </span>
+   </a>
+   <a class="card" href="test-skill/">
+    test_skill
+    <span>
+    </span>
+    <span class="version">
+     0.2.1.dev
+    </span>
+    <br/>
+    <span class="description">
+     Test skill.
+    </span>
+   </a>
    <a class="card" href="approach-to-something/">
     approach_to_something
     <span>
@@ -166,19 +213,10 @@
      Approaches to a charger and docks to it.
     </span>
    </a>
-   <a class="card" href="test-skill/">
-    test_skill
-    <span>
-    </span>
-    <span class="version">
-     0.2.1.dev
-    </span>
-    <br/>
-    <span class="description">
-     Test skill, do not take it into account
-    </span>
-   </a>
   </div>
+  <footer class="footer">
+   (c) All Rights Reserved to Unlimited Robotics Ltd. 2023.
+  </footer>
   <script>
    $(document).ready(function () {
       for (let lnk of document.getElementsByTagName('a')) {

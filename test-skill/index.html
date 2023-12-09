@@ -64,9 +64,15 @@
       margin-bottom: .2rem;
     }
 
+    button {
+      border-color: #1EAEDB;
+      color: #1EAEDB;
+    }
+
     button:hover {
-      border-color: darkcyan;
-      color: darkcyan;
+      border-color: white;
+      color: white;
+      background-color: #1EAEDB;
     }
 
     .versions {
@@ -77,19 +83,88 @@
     .versions div {
       display: block;
       text-decoration: none;
-      padding: 0px 10px;
-    }
-
-    .versions div a:nth-of-type(1) {
+      padding: 10px 20px;
       cursor: pointer;
     }
 
     .versions div a:nth-of-type(2) {
       display: none;
     }
+
+    .readme-block {
+      font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    }
+
+    .selected {
+      background-color: #1EAEDB;
+      border-radius: 5rem;
+    }
+
+    .selected a {
+      color: white;
+      font-weight: bold;
+    }
+
+    .selected.prerelease {
+      background: #ffdf76; /* Background for selected and prerelease elements */
+      position: relative; /* Position relative for absolute positioning of pseudo-element */
+    }
+
+    .selected.prerelease a{
+      color: #664e04;
+    }
+    
+    .selected.prerelease::after {
+      content: "Prerelease"; /* Text to display */
+      position: absolute;
+      right: 15px; /* Adjust as needed */
+      color: white;
+      font-size: 12px;
+      padding: 2px 5px;
+      background-color: #555555;
+      border-radius: 3px;
+    }
+
+    .main {
+      position: relative;
+    }
+  
+    .selected.main::after {
+      content: "Latest stable"; /* Text to display */
+      position: absolute;
+      right: 15px; /* Adjust as needed */
+      color: white;
+      font-size: 12px;
+      padding: 2px 5px;
+      background-color: #555555;
+      border-radius: 3px;
+    }
+
+    /* Footer */
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .footer {
+      background-color: #f5f5f5;
+      color: #08183f;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
   <title>
-   Pypi - YourCompany
+   Unlimited Robotics - Skills Index
   </title>
  </head>
  <body>
@@ -100,6 +175,9 @@
     </span>
     <span class="version" id="latest-version">
      0.2.1.dev
+    </span>
+    <span hidden="" id="latest-main-version">
+     0.2.2
     </span>
    </section>
    <pre hidden="" id="installdanger"><button class="danger-button" disabled="">DANGER ! A higher version of <i>test_skill</i> already exists on PyPi</button></pre>
@@ -114,31 +192,35 @@
       <b>
        Author :
       </b>
-      Santiago Barragan
+      Unlimited Robotics
      </p>
-     <section class="versions">
-      <div>
-       <a onclick="load_readme('0.1.0')">
+     <section class="versions" id="versions">
+      <div id="0.1.0" onclick="load_readme('0.1.0')">
+       <a>
         0.1.0
        </a>
        <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.0#egg=test-skill-0.1.0">
-        0.1.0
        </a>
       </div>
-      <div>
-       <a onclick="load_readme('0.2.1.dev')">
-        0.2.1.dev
-       </a>
-       <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.2.1.dev#egg=test-skill-0.2.1.dev">
-        0.1.0
-       </a>
-      </div>
-      <div>
-       <a onclick="load_readme('0.1.1.dev')">
+      <div class="prerelease" id="0.1.1.dev" onclick="load_readme('0.1.1.dev')">
+       <a>
         0.1.1.dev
        </a>
        <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.1.dev#egg=test-skill-0.1.1.dev">
-        0.1.0
+       </a>
+      </div>
+      <div class="" id="0.2.2" onclick="load_readme('0.2.2')">
+       <a>
+        0.2.2
+       </a>
+       <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.2.2#egg=test-skill-0.2.2">
+       </a>
+      </div>
+      <div class="prerelease" id="0.2.1.dev" onclick="load_readme('0.2.1.dev')">
+       <a>
+        0.2.1.dev
+       </a>
+       <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.2.1.dev#egg=test-skill-0.2.1.dev">
        </a>
       </div>
      </section>
@@ -147,7 +229,7 @@
      <h6 class="text-header">
       Description
      </h6>
-     <p id="markdown-container">
+     <p class="readme-block" id="markdown-container">
      </p>
     </div>
    </div>
@@ -160,11 +242,18 @@
       fetch(urlVersion)
       .then(response => {
           if (!response.ok) {
+              if (response.status == 404) {
+                return 'No README found for this version';
+              }
               throw new Error(`Failed to fetch content. Status code: ${response.status}`);
           }
           return response.text();
       })
       .then(markupContent => {
+        const contentDivs = document.querySelectorAll('.versions div');
+        contentDivs.forEach(div => div.classList.remove('selected'));
+
+        document.getElementById(version).classList.add('selected');
         document.getElementById('markdown-container').innerHTML = marked.parse(markupContent);
       })
       .catch(error => {
@@ -178,9 +267,10 @@
     }
 
     $(document).ready(function () {
-      var this_vers = document.getElementById('latest-version').textContent.trim();
+      var this_vers = document.getElementById('latest-main-version').textContent.trim();
+      document.getElementById(this_vers).classList.add('main');
       check_supply_chain_attack("test_skill", this_vers, warn_unsafe);
-      load_readme("0.1.0");
+      load_readme(this_vers);
     });
   </script>
  </body>
