@@ -61,16 +61,18 @@ def register(pkg_name, version, author, short_desc, homepage):
         raise ValueError("Package {} seems to already exists".format(norm_pkg_name))
 
     # Create a new anchor element for our new package
-    last_anchor = soup.find_all('a')[-1]        # Copy the last anchor element
-    new_anchor = copy.copy(last_anchor)
-    new_anchor['href'] = "{}/".format(norm_pkg_name)
-    new_anchor.contents[0].replace_with(pkg_name)
-    spans = new_anchor.find_all('span')
+    placeholder_card = soup.find('a', id='placeholder_card')
+    new_skill = copy.copy(placeholder_card)
+    new_skill['href'] = "{}/".format(norm_pkg_name)
+    new_skill.attrs.pop('style', None)
+    new_skill.attrs.pop('id', None)
+    new_skill.contents[0].replace_with(pkg_name)
+    spans = new_skill.find_all('span')
     spans[1].string = version       # First span contain the version
     spans[2].string = short_desc    # Second span contain the short description
 
     # Add it to our index and save it
-    last_anchor.insert_after(new_anchor)
+    placeholder_card.insert_after(new_skill)
     with open(INDEX_FILE, 'wb') as index:
         index.write(soup.prettify("utf-8"))
 
