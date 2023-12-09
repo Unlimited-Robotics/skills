@@ -81,7 +81,7 @@
             "justMyCode": true,
             "env": {
                 "PKG_ACTION" : "DELETE",
-                "PKG_NAME" : "approach_to_something",
+                "PKG_NAME" : "test_skill",
             }
         }
     ]
