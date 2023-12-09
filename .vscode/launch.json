@@ -47,6 +47,19 @@
             }
         },
         {
+            "name": "Update 0.2.2",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.github/actions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PKG_ACTION" : "UPDATE",
+                "PKG_NAME" : "test_skill",
+                "PKG_VERSION" : "0.2.2",
+            }
+        },
+        {
             "name": "Delete",
             "type": "python",
             "request": "launch",
