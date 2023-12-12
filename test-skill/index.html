@@ -30,11 +30,19 @@
  <body>
   <div class="container">
    <section class="header">
+    <a class="goback-button" href="/">
+     <svg height="50" width="50">
+      <circle cx="25" cy="25" fill="#1EAEDB" r="20">
+      </circle>
+      <path d="M15 25l10-10v5h10v10h-10v5z" fill="white">
+      </path>
+     </svg>
+    </a>
     test_skill
     <span>
     </span>
     <span class="version" id="latest-version">
-     0.1.1.dev
+     0.2.1.dev
     </span>
     <span hidden="" id="latest-main-version">
      0.1.0
@@ -45,8 +53,11 @@
    <hr/>
    <div class="row">
     <div class="three columns">
+     <b>
+      Project links :
+     </b>
      <button onclick="location.href='https://github.com/Unlimited-Robotics/skill_test_skill'">
-      Homepage
+      Github Repository
      </button>
      <p class="elem">
       <b>
@@ -67,6 +78,20 @@
         0.1.1.dev
        </a>
        <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.1.dev#egg=test-skill-0.1.1.dev">
+       </a>
+      </div>
+      <div class="prerelease" id="0.1.2.dev" onclick="load_readme('0.1.2.dev', scroll_to_div=true)">
+       <a>
+        0.1.2.dev
+       </a>
+       <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.1.2.dev#egg=test-skill-0.1.2.dev">
+       </a>
+      </div>
+      <div class="prerelease" id="0.2.1.dev" onclick="load_readme('0.2.1.dev', scroll_to_div=true)">
+       <a>
+        0.2.1.dev
+       </a>
+       <a href="git+https://github.com/Unlimited-Robotics/skill_test_skill@0.2.1.dev#egg=test-skill-0.2.1.dev">
        </a>
       </div>
      </section>
