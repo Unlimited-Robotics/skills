@@ -83,6 +83,14 @@
                 "PKG_ACTION" : "DELETE",
                 "PKG_NAME" : "test_skill",
             }
+        },
+        {
+            "name": "Update all",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/update_pkgs.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
