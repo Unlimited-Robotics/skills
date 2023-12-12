@@ -9,6 +9,10 @@ body {
   }
 
   .header {
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    gap: 1rem;
     margin-top: 15rem;
     font-size: 3.6rem;
     font-weight: 400;
@@ -26,6 +30,8 @@ body {
     font-size: 2.3rem;
     font-style: italic;
     font-weight: 300;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   .elem {
@@ -139,4 +145,21 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
+  }
+
+  .goback-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content; 
+    color: #1EAEDB;
+    background-color: white;
+  }
+
+  .goback-butto svg path {
+    fill: #1EAEDB;
   }
