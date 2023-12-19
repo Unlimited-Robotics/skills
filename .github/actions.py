@@ -116,9 +116,9 @@ def update(pkg_name, version):
         soup = BeautifulSoup(html_file, "html.parser")
         
     # Extract the URL from the onclick attribute
-    button = soup.find_all("button")[1]
+    button = soup.find('a', id='repoHomepage')
     if button:
-        onclick_attr = button.get("onclick")
+        onclick_attr = button.get("href")
         url_start = onclick_attr.find("'") + 1
         url_end = onclick_attr.rfind("'")
         link = onclick_attr[url_start:url_end]
