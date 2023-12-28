@@ -30,17 +30,3 @@ function warn_unsafe() {
   document.getElementById('installdanger').hidden = false;
   document.getElementById('installcmd').hidden = true;
 }
-
-$(document).ready(function () {
-  var this_vers = document.getElementById('latest-main-version').textContent.trim();
-  document.getElementById(this_vers).classList.add('main');
-  check_supply_chain_attack("_package_name", this_vers, warn_unsafe);
-
-  if (window.location.hash != "") {
-    let version_hash = window.location.hash;
-    version = version_hash.replace('#', '');
-    load_readme(version, scroll_to_div=true);
-    return;
-  }
-  load_readme(this_vers);
-});
