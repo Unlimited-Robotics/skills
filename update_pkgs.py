@@ -37,7 +37,7 @@ def execute_main(pkg_name, versions, short_desc, homepage):
 if __name__ == "__main__":
     # approach_to_tags
     pkg_name = "approach_to_tags"
-    versions = ["1.0.1", "2.0.0", "2.0.1.dev", "2.0.2.dev"] 
+    versions = ["1.0.1", "2.0.0", "2.0.1.dev", "2.0.2.dev", "2.0.3.dev", "2.0.4.dev"]
     short_desc = 'Approaches to a apriltag using different cameras.'
     homepage = 'https://github.com/Unlimited-Robotics/skill_approach_to_tags'
     execute_main(pkg_name, versions, short_desc, homepage)
