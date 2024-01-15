@@ -38,7 +38,7 @@ _While the PyPi index is public, private packages indexed here are kept private 
 
 ## Try it !
 
-Visit [astariul.github.io/github-hosted-pypi/](http://astariul.github.io/github-hosted-pypi/) and try to install packages indexed there !
+Visit [unlimited-robotics.github.io/skills/](https://unlimited-robotics.github.io/skills/) and try to install packages indexed there !
 
 ---
 
@@ -63,25 +63,6 @@ pip install public-hello==0.1 --extra-index-url https://unlimited-robotics.githu
 ```
 
 ---
-
-Now try to install the package `private-hello` :
-```console
-pip install private-hello --extra-index-url https://unlimited-robotics.github.io/skills/
-```
-
-_It will not work, because it's private and only me can access it !_
-
-## Get started
-
-* Use this template and create your own repository :
-
-<p align="center">
-  <a href="https://github.com/astariul/github-hosted-pypi/generate"><img src="https://img.shields.io/badge/%20-Use%20this%20template-green?style=for-the-badge&color=347d39" alt="Use template" /></a>
-</p>
-
-* Go to `Settings` of your repository, and enable Github Page
-* Customize `index.html` and `pkg_template.html` to your liking
-* You're ready to go ! Visit `<user>.github.io/<repo_name>` to see your PyPi index
 
 ## Modify indexed packages
 
