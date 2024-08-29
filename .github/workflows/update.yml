@@ -36,9 +36,8 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:
-        commit-message: ':package: [:robot:] Update package in PyPi index'
-        title: '[🤖] Update `${{ inputs.package_name }}` in PyPi index'
-        body: Automatically generated PR, updating `${{ inputs.package_name }}` in PyPi
-          index.
+        commit-message: ':package: [:robot:] Update `${{ inputs.package_name }}` to version `${{ inputs.version }}`'
+        title: '[🤖] Update `${{ inputs.package_name }}` to version `${{ inputs.version }}`'
+        body: Automatically generated PR, updating `${{ inputs.package_name }}`.
         branch-suffix: random
         delete-branch: true

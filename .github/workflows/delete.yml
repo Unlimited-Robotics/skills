@@ -31,9 +31,8 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:
-        commit-message: ':package: [:robot:] Delete package from PyPi index'
-        title: '[🤖] Delete `${{ inputs.package_name }}` from PyPi index'
-        body: Automatically generated PR, deleting `${{ inputs.package_name }}` from
-          PyPi index.
+        commit-message: ':package: [:robot:] Delete `${{ inputs.package_name }}`'
+        title: '[🤖] Delete `${{ inputs.package_name }}`'
+        body: Automatically generated PR, deleting `${{ inputs.package_name }}`.
         branch-suffix: random
         delete-branch: true
